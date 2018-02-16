@@ -6,6 +6,8 @@ package com.example.rutujabanswal.movie_demo_again;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.sax.StartElementListener;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -19,8 +21,13 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import static android.R.attr.id;
+import static android.R.attr.targetActivity;
+import static android.app.PendingIntent.getActivity;
+
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> implements View.OnClickListener {
+    public static final String PRODUCT = "product";//I converted it to constant
     static int pos;
     //this context we will use to inflate the layout
     private Context mCtx;
@@ -54,11 +61,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             @Override
             public void onClick(View v) {
-                      pos = product.getId();
-                 String pos_new = String.valueOf(pos);
-Toast.makeText(mCtx,"Movie Number "+ pos_new,Toast.LENGTH_SHORT).show();
+                pos = product.getId();
+              //  String pos_new = String.valueOf(pos);
+                //Toast.makeText(mCtx,"Movie Number "+ pos_new,Toast.LENGTH_SHORT).show();
 
-                   //write switch here
+                try {
+                       Intent i1 = new Intent(mCtx, movie_harry.class);
+                       i1.putExtra(PRODUCT, product);
+//it's done now
+                       mCtx.startActivity(i1);
+                   }
+                   catch (Exception e)
+                   {
+                       e.printStackTrace();
+                   }
+                //write switch here
             }
         });
     }
@@ -77,10 +94,11 @@ Toast.makeText(mCtx,"Movie Number "+ pos_new,Toast.LENGTH_SHORT).show();
     @Override
     public void onClick(View v) {
 
+
     }
 
-
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+//I'm cleaning the code a little bit, So, it'll be better to understand, Tell me when you get confused.
+    class ProductViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewTitle, textViewShortDesc;
         ImageView imageView;
@@ -92,7 +110,14 @@ Toast.makeText(mCtx,"Movie Number "+ pos_new,Toast.LENGTH_SHORT).show();
             textViewShortDesc = itemView.findViewById(R.id.textViewShortDesc);
             textViewShortDesc.setCursorVisible(true);
             imageView = itemView.findViewById(R.id.imageView);
+
+
         }
+
+
+//we can talk here, not a problem
+        //We needed to implement parcel in the product class that's why it was giving errors,
+
     }
 }
 

@@ -1,10 +1,13 @@
 package com.example.rutujabanswal.movie_demo_again;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Rutuja Banswal on 15-02-2018.
  */
-
-public class Product {
+//I told you to implement the Parcelable here.
+public class Product implements Parcelable{
     private int id;
     private String title;
     private String shortdesc;
@@ -18,6 +21,26 @@ public class Product {
      this.shortdesc = shortdesc;
         this.image = image;
     }
+
+    protected Product(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        shortdesc = in.readString();
+        image = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
     public int getId() {
         return id;
     }
@@ -33,5 +56,20 @@ public String getShortdesc() {
 
     public int getImage() {
         return image;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(title);
+        dest.writeString(shortdesc);
+        dest.writeInt(image);
+        //DO the same for the rest
+
     }
 }
