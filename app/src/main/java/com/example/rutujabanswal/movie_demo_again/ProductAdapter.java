@@ -13,12 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
-
-import static android.R.attr.id;
-import static android.app.PendingIntent.getActivity;
 
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> implements View.OnClickListener {
@@ -62,15 +58,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 //Toast.makeText(mCtx,"Movie Number "+ pos_new,Toast.LENGTH_SHORT).show();
 
                 try {
-                    Log.d(TAG,product.getTitle());
-                    Toast.makeText(mCtx,"parcel title"+product.getTitle(),Toast.LENGTH_SHORT).show();
+                    Log.d(TAG,product.toString());
+                 /*   Toast.makeText(mCtx,"parcel title"+product.getTitle(),Toast.LENGTH_SHORT).show();
                     Toast.makeText(mCtx,"parcel id"+product.getId(),Toast.LENGTH_SHORT).show();
-                    Toast.makeText(mCtx,"parcel desc"+product.getShortdesc(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mCtx,"parcel desc"+product.getShortdesc(),Toast.LENGTH_SHORT).show();*/
                    // Toast.makeText(mCtx,"parcel image "+product.getImage(),Toast.LENGTH_SHORT).show();
 
-                    String t = product.getTitle();
                        Intent i1 = new Intent(mCtx, movie_harry.class);
-                       i1.putExtra("MovieTitle",t);
+                       i1.putExtra(PRODUCT,product);
 
 //it's done now
                        mCtx.startActivity(i1);
