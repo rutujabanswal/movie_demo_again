@@ -6,29 +6,25 @@ package com.example.rutujabanswal.movie_demo_again;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.sax.StartElementListener;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import static android.R.attr.id;
-import static android.R.attr.targetActivity;
 import static android.app.PendingIntent.getActivity;
 
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> implements View.OnClickListener {
     public static final String PRODUCT = "product";//I converted it to constant
     static int pos;
+    private static final String TAG = "Mylog :";
     //this context we will use to inflate the layout
     private Context mCtx;
     MainActivity mainActivity = new MainActivity();
@@ -61,13 +57,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             @Override
             public void onClick(View v) {
-                pos = product.getId();
+               // pos = product.getId();
               //  String pos_new = String.valueOf(pos);
                 //Toast.makeText(mCtx,"Movie Number "+ pos_new,Toast.LENGTH_SHORT).show();
 
                 try {
+                    Log.d(TAG,product.getTitle());
+                    Toast.makeText(mCtx,"parcel title"+product.getTitle(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mCtx,"parcel id"+product.getId(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mCtx,"parcel desc"+product.getShortdesc(),Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(mCtx,"parcel image "+product.getImage(),Toast.LENGTH_SHORT).show();
+
+                    String t = product.getTitle();
                        Intent i1 = new Intent(mCtx, movie_harry.class);
-                       i1.putExtra(PRODUCT, product);
+                       i1.putExtra("MovieTitle",t);
+
 //it's done now
                        mCtx.startActivity(i1);
                    }
@@ -93,7 +97,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onClick(View v) {
-
 
     }
 

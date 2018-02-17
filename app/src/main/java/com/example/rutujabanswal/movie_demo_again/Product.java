@@ -1,7 +1,9 @@
 package com.example.rutujabanswal.movie_demo_again;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.TextView;
 
 /**
  * Created by Rutuja Banswal on 15-02-2018.
@@ -11,7 +13,8 @@ public class Product implements Parcelable{
     private int id;
     private String title;
     private String shortdesc;
- //   private double rating;
+    private Parcel in;
+    //   private double rating;
    // private double price;
     private int image;
 
@@ -65,6 +68,7 @@ public String getShortdesc() {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        Bundle b = new Bundle();
         dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(shortdesc);
@@ -72,4 +76,5 @@ public String getShortdesc() {
         //DO the same for the rest
 
     }
+
 }
